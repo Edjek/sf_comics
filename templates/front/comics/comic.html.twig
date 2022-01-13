@@ -14,6 +14,7 @@
 			<p>{{ comic.licence.name }}</p>
 			<p>{{ comic.editor.name }}</p>
 			<p>{{ comic.year | date('d-m-Y')}}</p>
+			<p>{% for image in comic.images %}<img src="{{ asset('media/'~image.src) }}" alt="" width="100px">{% endfor %}</p>
 		</div>
 	</div>
 
