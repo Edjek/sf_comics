@@ -24,7 +24,7 @@ class AdminImageController extends AbstractController
 
         if ($imageForm->isSubmitted() && $imageForm->isValid()) {
             // On récupère le fichier
-            $imageFile = $imageForm->get('media')->getData();
+            $imageFile = $imageForm->get('src')->getData();
 
             if ($imageFile) {
 

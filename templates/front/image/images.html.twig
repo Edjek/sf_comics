@@ -19,6 +19,7 @@
 					<th scope="col">Title</th>
 					<th scope="col">Src</th>
 					<th scope="col">Alt</th>
+					<th scope="col">Image</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -31,6 +32,8 @@
 						</td>
 						<td>{{ image.src }}</td>
 						<td>{{ image.alt }}</td>
+						<td><img src="{{ asset('media/'~image.src) }}" alt="" width="100px"></td>
+
 					</tr>
 				{% endfor %}
 			</tbody>
