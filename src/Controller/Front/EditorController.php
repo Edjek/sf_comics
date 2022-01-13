@@ -2,17 +2,29 @@
 
 namespace App\Controller\Front;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\EditorRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EditorController extends AbstractController
 {
-    #[Route('/editor', name: 'editor')]
-    public function index(): Response
+    #[Route('/editors', name: 'editor_list')]
+    public function editor_list(EditorRepository $editorRepository)
     {
-        return $this->render('editor/index.html.twig', [
-            'controller_name' => 'EditorController',
+        $editors = $editorRepository->findAll();
+
+        return $this->render('front/editor/editors.html.twig', [
+            'editors' => $editors,
+        ]);
+    }
+
+    #[Route('/editor/{id}', name: 'editor_show')]
+    public function editorShow($id, EditorRepository $editorRepository)
+    {
+        $editor = $editorRepository->find($id);
+        return $this->render('front/editor/editor.html.twig', [
+            'editor' => $editor,
         ]);
     }
 }

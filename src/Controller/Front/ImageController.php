@@ -2,17 +2,29 @@
 
 namespace App\Controller\Front;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ImageRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ImageController extends AbstractController
 {
-    #[Route('/image', name: 'image')]
-    public function index(): Response
+    #[Route('/images', name: 'image_list')]
+    public function image_list(ImageRepository $imageRepository)
     {
-        return $this->render('image/index.html.twig', [
-            'controller_name' => 'ImageController',
+        $images = $imageRepository->findAll();
+
+        return $this->render('front/image/images.html.twig', [
+            'images' => $images,
+        ]);
+    }
+
+    #[Route('/image/{id}', name: 'image_show')]
+    public function imageShow($id, ImageRepository $imageRepository)
+    {
+        $image = $imageRepository->find($id);
+        return $this->render('front/image/image.html.twig', [
+            'image' => $image,
         ]);
     }
 }

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comics!
+{% endblock %}
+
+{% block body %}
+
+	<div class="container mt-5">
+		{% for message in app.flashes('notice') %}
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+				{{ message }}
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		{% endfor %}
+
+		<table class="table table-hover text-center">
+			<thead>
+				<tr>
+					<th scope="col">Title</th>
+					<th scope="col">Description</th>
+					<th scope="col">Year</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for comic in comics %}
+					<tr>
+						<td>
+							<a href="{{ path('comic_show', { 'id' : comic.id }) }}">
+								{{ comic.title }}
+							</a>
+						</td>
+						<td>{{ comic.description }}</td>
+						<td>{{ comic.year }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

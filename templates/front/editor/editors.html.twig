@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editors!
+{% endblock %}
+
+{% block body %}
+
+	<div class="container mt-5">
+		{% for message in app.flashes('notice') %}
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+				{{ message }}
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		{% endfor %}
+
+		<table class="table table-hover text-center">
+			<thead>
+				<tr>
+					<th scope="col">Name</th>
+					<th scope="col">Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for editor in editors %}
+					<tr>
+						<td>
+							<a href="{{ path('editor_show', { 'id' : editor.id }) }}">
+								{{ editor.name }}
+							</a>
+						</td>
+						<td>{{ editor.country }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}
