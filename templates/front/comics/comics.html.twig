@@ -18,6 +18,10 @@
 				<tr>
 					<th scope="col">Title</th>
 					<th scope="col">Description</th>
+					<th scope="col">Writer</th>
+					<th scope="col">Designer</th>
+					<th scope="col">Licence</th>
+					<th scope="col">Editor</th>
 					<th scope="col">Year</th>
 				</tr>
 			</thead>
@@ -30,7 +34,11 @@
 							</a>
 						</td>
 						<td>{{ comic.description }}</td>
-						<td>{{ comic.year }}</td>
+						<td>{{ comic.writer.name }}</td>
+						<td>{{ comic.designer.name }}</td>
+						<td>{{ comic.licence.name }}</td>
+						<td>{{ comic.editor.name }}</td>
+						<td>{{ comic.year | date('d-m-Y') }}</td>
 					</tr>
 				{% endfor %}
 			</tbody>

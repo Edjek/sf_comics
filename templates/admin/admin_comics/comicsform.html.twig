@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comics
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="my-3">
+			<a href="{{ path('main') }}" class="btn btn-outline-primary">
+				Accueil
+			</a>
+			<a href="{{ path('comics_list') }}" class="btn btn-outline-primary">
+				Retour à la liste
+			</a>
+		</div>
+
+		{{ form_start(comicsForm) }}
+		<div class="mb-3">
+			{{ form_label(comicsForm.title, 'Title : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(comicsForm.title, {'attr' : {'class' : 'form-control'} } ) }}
+		</div>
+
+		<div class="mb-3">
+			{{ form_label(comicsForm.description, 'Description : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(comicsForm.description, {'attr' : { 'class' : 'form-control'} } ) }}
+		</div>
+
+		<div class="mb-3">
+			{{ form_label(comicsForm.designer, 'Designer : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(comicsForm.designer, {'attr' : { 'class' : 'form-control'} } ) }}
+		</div>
+
+		<div class="mb-3">
+			{{ form_label(comicsForm.writer, 'Writer : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(comicsForm.writer, {'attr' : { 'class' : 'form-control'} } ) }}
+		</div>
+
+		<div class="mb-3">
+			{{ form_label(comicsForm.editor, 'Editor : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(comicsForm.editor, {'attr' : { 'class' : 'form-control'} } ) }}
+		</div>
+
+		<div class="mb-3">
+			{{ form_label(comicsForm.licence, 'Licence : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(comicsForm.licence, {'attr' : { 'class' : 'form-control'} } ) }}
+		</div>
+
+		<div class="mb-3">
+			{{ form_label(comicsForm.year, 'Year : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(comicsForm.year, {'attr' : { 'class' : 'form-control'} } ) }}
+		</div>
+
+		{{ form_widget(comicsForm.enregistrer, { 'attr' : {'class' : 'btn btn-outline-primary'} } ) }}
+
+		{{ form_end(comicsForm) }}
+	</div>
+
+{% endblock %}

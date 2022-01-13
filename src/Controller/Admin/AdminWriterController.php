@@ -27,7 +27,7 @@ class AdminWriterController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'Une marque a été créé'
+                'Un 2crivain a été créé'
             );
 
             return $this->redirectToRoute("writer_list");

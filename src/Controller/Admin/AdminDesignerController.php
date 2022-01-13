@@ -2,17 +2,36 @@
 
 namespace App\Controller\Admin;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Designer;
+use App\Form\DesignerType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminDesignerController extends AbstractController
 {
-    #[Route('/admin/designer', name: 'admin_designer')]
-    public function index(): Response
+    #[Route('/admin/create/designer', name: 'admin_create_designer')]
+    public function createDesigner(EntityManagerInterface $entityManagerInterface, Request $request)
     {
-        return $this->render('admin_designer/index.html.twig', [
-            'controller_name' => 'AdminDesignerController',
-        ]);
+        $designer = new Designer();
+
+        $designerForm = $this->createForm(DesignerType::class, $designer);
+
+        $designerForm->handleRequest($request);
+
+        if ($designerForm->isSubmitted() && $designerForm->isValid()) {
+            $entityManagerInterface->persist($designer);
+            $entityManagerInterface->flush();
+
+            $this->addFlash(
+                'notice',
+                'Un dessinateur a été créé'
+            );
+
+            return $this->redirectToRoute("designer_list");
+        }
+
+        return $this->render("admin/admin_designer/designerform.html.twig", ['designerForm' => $designerForm->createView()]);
     }
 }

@@ -9,7 +9,11 @@
 		<div class="border p-5">
 			<h1>{{ comic.title }}</h1>
 			<p>{{ comic.description }}</p>
-			<p>{{ comic.year }}</p>
+			<p>{{ comic.writer.name }}</p>
+			<p>{{ comic.designer.name }}</p>
+			<p>{{ comic.licence.name }}</p>
+			<p>{{ comic.editor.name }}</p>
+			<p>{{ comic.year | date('d-m-Y')}}</p>
 		</div>
 	</div>
 

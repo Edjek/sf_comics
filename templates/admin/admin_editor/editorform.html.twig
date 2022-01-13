@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editor
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="my-3">
+			<a href="{{ path('main') }}" class="btn btn-outline-primary">
+				Accueil
+			</a>
+			<a href="{{ path('editor_list') }}" class="btn btn-outline-primary">
+				Retour à la liste
+			</a>
+		</div>
+
+		{{ form_start(editorForm) }}
+		<div class="mb-3">
+			{{ form_label(editorForm.name, 'Name : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(editorForm.name, {'attr' : {'class' : 'form-control'} } ) }}
+		</div>
+
+		<div class="mb-3">
+			{{ form_label(editorForm.country, 'Country : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(editorForm.country, {'attr' : { 'class' : 'form-control'} } ) }}
+		</div>
+
+		{{ form_widget(editorForm.enregistrer, { 'attr' : {'class' : 'btn btn-outline-primary'} } ) }}
+
+		{{ form_end(editorForm) }}
+	</div>
+
+{% endblock %}

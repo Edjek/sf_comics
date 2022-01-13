@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Designer
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="my-3">
+			<a href="{{ path('main') }}" class="btn btn-outline-primary">
+				Accueil
+			</a>
+			<a href="{{ path('designer_list') }}" class="btn btn-outline-primary">
+				Retour à la liste
+			</a>
+		</div>
+
+		{{ form_start(designerForm) }}
+		<div class="mb-3">
+			{{ form_label(designerForm.name, 'Name : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(designerForm.name, {'attr' : {'class' : 'form-control'} } ) }}
+		</div>
+
+		<div class="mb-3">
+			{{ form_label(designerForm.country, 'Country : ', {'label_attr' : { 'class' : 'form-label' } } ) }}
+			{{ form_widget(designerForm.country, {'attr' : { 'class' : 'form-control'} } ) }}
+		</div>
+
+		{{ form_widget(designerForm.enregistrer, { 'attr' : {'class' : 'btn btn-outline-primary'} } ) }}
+
+		{{ form_end(designerForm) }}
+	</div>
+
+{% endblock %}

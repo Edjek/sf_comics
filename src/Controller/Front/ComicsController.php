@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ComicsController extends AbstractController
 {
-    #[Route('/comics', name: 'comic_list')]
+    #[Route('/comics', name: 'comics_list')]
     public function comic_list(ComicsRepository $comicsRepository)
     {
         $comics = $comicsRepository->findAll();

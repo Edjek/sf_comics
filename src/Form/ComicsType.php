@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Comics;
+use App\Entity\Editor;
 use App\Entity\Writer;
 use App\Entity\Licence;
 use App\Entity\Designer;

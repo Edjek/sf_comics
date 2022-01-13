@@ -23,7 +23,7 @@ class ImageType extends AbstractType
             ->add('title')
             ->add('comics', EntityType::class,[
                 'class' => Comics::class,
-                'choice_label' => 'name'
+                'choice_label' => 'title'
             ])
             ->add('enregistrer', SubmitType::class);
     }
