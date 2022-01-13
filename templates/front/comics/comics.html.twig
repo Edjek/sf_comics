@@ -23,6 +23,7 @@
 					<th scope="col">Licence</th>
 					<th scope="col">Editor</th>
 					<th scope="col">Year</th>
+					<th scope="col">Images</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -39,6 +40,7 @@
 						<td>{{ comic.licence.name }}</td>
 						<td>{{ comic.editor.name }}</td>
 						<td>{{ comic.year | date('d-m-Y') }}</td>
+						<td>{% for image in comic.images %}<img src="{{ asset('media/'~image.src) }}" alt="" width="100px">{% endfor %}/td>
 					</tr>
 				{% endfor %}
 			</tbody>
