@@ -21,17 +21,34 @@
 		{% endblock %}
 	</head>
 	<style>
-		.sign-in {
+		.fixed {
 			position: fixed;
 			top: 20px;
 			right: 30px;
 		}
+		.fixed-a {
+			right: 120px;
+		}
 	</style>
 	<body>
 		{% if app.user is null %}
-			<div class=" sign-in">
+			<div class="fixed">
 				<a href="{{ path('app_login') }}" class="btn btn-outline-primary">
 					Sign in
+				</a>
+			</div>
+		{% endif %}
+		{% if app.user is not null %}
+			{% if app.user.roles[0] == 'ROLE_ADMIN' %}
+				<div class="fixed fixed-a">
+					<a href="{{ path('admin_main') }}" class="btn btn-outline-primary">
+						Admin
+					</a>
+				</div>
+			{% endif %}
+			<div class="fixed">
+				<a href="{{ path('app_logout') }}" class="btn btn-outline-primary">
+					Logout
 				</a>
 			</div>
 		{% endif %}
