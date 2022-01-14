@@ -41,6 +41,6 @@ class UserController extends AbstractController
             return $this->redirectToRoute("app_login");
         }
 
-        return $this->render("admin/admin_user/userform.html.twig", ['userForm' => $userForm->createView()]);
+        return $this->render("front/user/userform.html.twig", ['userForm' => $userForm->createView()]);
     }
 }
