@@ -12,6 +12,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminLicenceController extends AbstractController
 {
+    #[Route('/admin/licence', name: 'admin_licence_list')]
+    public function comic_list(LicenceRepository $licenceRepository)
+    {
+        $licences = $licenceRepository->findAll();
+
+        return $this->render('admin/admin_licence/licences.html.twig', [
+            'licences' => $licences,
+        ]);
+    }
+
     #[Route('/admin/create/licence', name: 'admin_create_licence')]
     public function createLicence(EntityManagerInterface $entityManagerInterface, Request $request)
     {
@@ -30,15 +40,13 @@ class AdminLicenceController extends AbstractController
                 'Une licence a été créée'
             );
 
-            return $this->redirectToRoute("licence_list");
+            return $this->redirectToRoute("admin_licence_list");
         }
 
         return $this->render("admin/admin_licence/licenceform.html.twig", ['licenceForm' => $licenceForm->createView()]);
     }
 
-        /**
-     * @Route("admin/update/licence/{id}", name="update_licence")
-     */
+    #[Route('/admin/update/licence/{id}', name: 'admin_update_licence')]
     public function updateLicence(
         $id,
         LicenceRepository $licenceRepository,
@@ -61,7 +69,7 @@ class AdminLicenceController extends AbstractController
                 'La licence a été modifiée'
             );
 
-            return $this->redirectToRoute('licence_list');
+            return $this->redirectToRoute('admin_licence_list');
         }
 
         return $this->render("admin/admin_licence/licenceform.html.twig", ['licenceForm' => $licenceForm->createView()]);
@@ -81,6 +89,6 @@ class AdminLicenceController extends AbstractController
             'La licence a été supprimée'
         );
 
-        return $this->redirectToRoute("licence_list");
+        return $this->redirectToRoute("admin_licence_list");
     }
 }

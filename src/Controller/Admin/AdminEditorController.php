@@ -13,6 +13,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminEditorController extends AbstractController
 {
+    #[Route('/admin/editor', name: 'admin_editor_list')]
+    public function comic_list(EditorRepository $editorRepository)
+    {
+        $editors = $editorRepository->findAll();
+
+        return $this->render('admin/admin_editor/editors.html.twig', [
+            'editors' => $editors,
+        ]);
+    }
+
     #[Route('/admin/create/editor', name: 'admin_create_editor')]
     public function createEditor(EntityManagerInterface $entityManagerInterface, Request $request)
     {
@@ -31,15 +41,14 @@ class AdminEditorController extends AbstractController
                 'Un editeur a été créé'
             );
 
-            return $this->redirectToRoute("editor_list");
+            return $this->redirectToRoute("admin_editor_list");
         }
 
         return $this->render("admin/admin_editor/editorform.html.twig", ['editorForm' => $editorForm->createView()]);
     }
 
-        /**
-     * @Route("admin/update/editor/{id}", name="update_editor")
-     */
+
+    #[Route('/admin/update/editor/{id}', name: 'admin_update_editor')]
     public function updateEditor(
         $id,
         EditorRepository $editorRepository,
@@ -62,7 +71,7 @@ class AdminEditorController extends AbstractController
                 'L\'editeur a été modifié'
             );
 
-            return $this->redirectToRoute('editor_list');
+            return $this->redirectToRoute('admin_editor_list');
         }
 
         return $this->render("admin/admin_editor/editorform.html.twig", ['editorForm' => $editorForm->createView()]);
@@ -82,6 +91,6 @@ class AdminEditorController extends AbstractController
             'L\'editeur a été supprimé'
         );
 
-        return $this->redirectToRoute("editor_list");
+        return $this->redirectToRoute("admin_editor_list");
     }
 }

@@ -12,7 +12,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminUserController extends AbstractController
 {
-    #[Route('/admin/user', name: 'user_list')]
+    #[Route('/admin/user', name: 'admin_user_list')]
     public function user_list(UserRepository $userRepository)
     {
         $users = $userRepository->findAll();
@@ -60,7 +60,7 @@ class AdminUserController extends AbstractController
                 'L\'utilisateur a été modifié'
             );
 
-            return $this->redirectToRoute('user_list');
+            return $this->redirectToRoute('admin_user_list');
         }
 
         return $this->render("admin/admin_user/userform.html.twig", ['userForm' => $userForm->createView()]);
@@ -80,6 +80,6 @@ class AdminUserController extends AbstractController
             'L\'utilisateur a été supprimé'
         );
 
-        return $this->redirectToRoute("main");
+        return $this->redirectToRoute("admin_user_list");
     }
 }

@@ -1,11 +1,11 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Writers!
+{% block title %}Licences!
 {% endblock %}
 
 {% block body %}
 
-	<div class="container mt-5">
+	<div class="container mt-3">
 		{% for message in app.flashes('notice') %}
 			<div class="alert alert-success alert-dismissible fade show" role="alert">
 				{{ message }}
@@ -24,22 +24,24 @@
 				<tr>
 					<th scope="col">Name</th>
 					<th scope="col">Description</th>
+					<th scope="col">Media</th>
 					<th scope="col">Modifier</th>
 					<th scope="col">Supprimer</th>
 				</tr>
 			</thead>
 			<tbody>
-				{% for writer in writers %}
+				{% for licence in licences %}
 					<tr>
-						<td>{{ writer.name }}</td>
-						<td>{{ writer.country }}</td>
+						<td>{{ licence.name }}</td>
+						<td>{{ licence.description }}</td>
+						<td>{{ licence.media }}</td>
 						<td>
-							<a href="{{ path('admin_update_writer', { 'id' : writer.id }) }}">
+							<a href="{{ path('admin_update_licence', { 'id' : licence.id }) }}">
 								<i class="bi bi-pencil-square"></i>
 							</a>
 						</td>
 						<td>
-							<a href="{{ path('admin_delete_writer', { 'id' : writer.id }) }}">
+							<a href="{{ path('admin_delete_licence', { 'id' : licence.id }) }}">
 								<i class="bi bi-trash text-danger"></i>
 							</a>
 						</td>

@@ -89,6 +89,6 @@ class AdminWriterController extends AbstractController
             'L\'auteur a été supprimé'
         );
 
-        return $this->redirectToRoute("writer_list");
+        return $this->redirectToRoute("admin_writer_list");
     }
 }

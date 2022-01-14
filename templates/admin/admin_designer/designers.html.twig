@@ -1,11 +1,11 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Writers!
+{% block title %}Designer!
 {% endblock %}
 
 {% block body %}
 
-	<div class="container mt-5">
+	<div class="container mt-3">
 		{% for message in app.flashes('notice') %}
 			<div class="alert alert-success alert-dismissible fade show" role="alert">
 				{{ message }}
@@ -29,17 +29,17 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for writer in writers %}
+				{% for designer in designers %}
 					<tr>
-						<td>{{ writer.name }}</td>
-						<td>{{ writer.country }}</td>
+						<td>{{ designer.name }}</td>
+						<td>{{ designer.country }}</td>
 						<td>
-							<a href="{{ path('admin_update_writer', { 'id' : writer.id }) }}">
+							<a href="{{ path('admin_update_designer', { 'id' : designer.id }) }}">
 								<i class="bi bi-pencil-square"></i>
 							</a>
 						</td>
 						<td>
-							<a href="{{ path('admin_delete_writer', { 'id' : writer.id }) }}">
+							<a href="{{ path('admin_delete_designer', { 'id' : designer.id }) }}">
 								<i class="bi bi-trash text-danger"></i>
 							</a>
 						</td>

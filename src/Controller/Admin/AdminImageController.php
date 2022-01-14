@@ -13,6 +13,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminImageController extends AbstractController
 {
+    #[Route('/admin/image', name: 'admin_image_list')]
+    public function comic_list(ImageRepository $imageRepository)
+    {
+        $images = $imageRepository->findAll();
+
+        return $this->render('admin/admin_image/images.html.twig', [
+            'images' => $images,
+        ]);
+    }
+
     #[Route('/admin/create/image', name: 'admin_create_image')]
     public function createImage(EntityManagerInterface $entityManagerInterface, Request $request, SluggerInterface $sluggerInterface)
     {
@@ -59,7 +69,7 @@ class AdminImageController extends AbstractController
                 'Une image a été créée'
             );
 
-            return $this->redirectToRoute("image_list");
+            return $this->redirectToRoute("admin_image_list");
         }
 
         return $this->render("admin/admin_image/imageform.html.twig", ['imageForm' => $imageForm->createView()]);
@@ -117,7 +127,7 @@ class AdminImageController extends AbstractController
                 'L\'image a été modifiée'
             );
 
-            return $this->redirectToRoute('image_list');
+            return $this->redirectToRoute('admin_image_list');
         }
 
         return $this->render("admin/admin_image/imageform.html.twig", ['imageForm' => $imageForm->createView()]);
@@ -137,6 +147,6 @@ class AdminImageController extends AbstractController
             'L\'image a été supprimée'
         );
 
-        return $this->redirectToRoute("image_list");
+        return $this->redirectToRoute("admin_image_list");
     }
 }

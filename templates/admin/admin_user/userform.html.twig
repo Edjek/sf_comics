@@ -1,4 +1,8 @@
-{% extends 'base.html.twig' %}
+{% if app.user.roles == 'admin' %}
+	{% extends 'admin/base.html.twig' %}
+{% else %}
+	{% extends 'base.html.twig' %}
+{% endif %}
 
 {% block title %}User
 {% endblock %}

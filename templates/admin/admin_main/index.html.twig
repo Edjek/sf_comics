@@ -11,19 +11,17 @@
         font: 18px/1.5 sans-serif;
     }
 </style>
-<div class="example-wrapper">
+<div class="example-wrapper text-center">
     <h1>Administration!</h1>
     <div class="mt-5">
-        <div class="mt-3">
-            <ul>
-                <li><a href="{{ path('admin_comics_list') }}">Gerer les comics</a></li>
-                <li><a href="{{ path('admin_writer_list') }}">Gerer les auteurs</a></li>
-                <li><a href="{{ path('designer_list') }}">Gerer les dessinateurs</a></li>
-                <li><a href="{{ path('editor_list') }}">Gerer les editeurs</a></li>
-                <li><a href="{{ path('licence_list') }}">Gerer les licences</a></li>
-                <li><a href="{{ path('image_list') }}">Gerer les images</a></li>
-            </ul>
-        </div>
+                <div><a href="{{ path('admin_user_list') }}" class="btn btn-success w-50 m-3">Gerer les utilisateurs</a></div>
+                <div><a href="{{ path('admin_comics_list') }}" class="btn btn-dark w-50 m-3">Gerer les comics</a></div>
+                <div><a href="{{ path('admin_writer_list') }}" class="btn btn-dark w-50 m-3">Gerer les auteurs</a></div>
+                <div><a href="{{ path('admin_designer_list') }}" class="btn btn-dark w-50 m-3">Gerer les dessinateurs</a></div>
+                <div><a href="{{ path('admin_editor_list') }}" class="btn btn-dark w-50 m-3">Gerer les editeurs</a></div>
+                <div><a href="{{ path('admin_licence_list') }}" class="btn btn-dark w-50 m-3">Gerer les licences</a></div>
+                <div><a href="{{ path('admin_image_list') }}" class="btn btn-dark w-50 m-3">Gerer les images</a></div>
+
     </div>
 </div>
 {% endblock %}

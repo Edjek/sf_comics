@@ -12,6 +12,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminDesignerController extends AbstractController
 {
+    #[Route('/admin/designer', name: 'admin_designer_list')]
+    public function comic_list(DesignerRepository $designerRepository)
+    {
+        $designers = $designerRepository->findAll();
+
+        return $this->render('admin/admin_designer/designers.html.twig', [
+            'designers' => $designers,
+        ]);
+    }
+
     #[Route('/admin/create/designer', name: 'admin_create_designer')]
     public function createDesigner(EntityManagerInterface $entityManagerInterface, Request $request)
     {
@@ -30,15 +40,13 @@ class AdminDesignerController extends AbstractController
                 'Un dessinateur a été créé'
             );
 
-            return $this->redirectToRoute("designer_list");
+            return $this->redirectToRoute("admin_designer_list");
         }
 
         return $this->render("admin/admin_designer/designerform.html.twig", ['designerForm' => $designerForm->createView()]);
     }
 
-        /**
-     * @Route("admin/update/designer/{id}", name="update_designer")
-     */
+    #[Route('/admin/update/designer/{id}', name: 'admin_update_designer')]
     public function updateDesigner(
         $id,
         DesignerRepository $designerRepository,
@@ -61,7 +69,7 @@ class AdminDesignerController extends AbstractController
                 'Le dessinateur a été modifié'
             );
 
-            return $this->redirectToRoute('designer_list');
+            return $this->redirectToRoute('admin_designer_list');
         }
 
         return $this->render("admin/admin_designer/designerform.html.twig", ['designerForm' => $designerForm->createView()]);
@@ -81,6 +89,6 @@ class AdminDesignerController extends AbstractController
             'La dessinateur a été supprimé'
         );
 
-        return $this->redirectToRoute("designer_list");
+        return $this->redirectToRoute("admin_designer_list");
     }
 }
