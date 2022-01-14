@@ -45,10 +45,12 @@
 						<td>{{ comic.designer.name }}</td>
 						<td>{{ comic.licence.name }}</td>
 						<td>{{ comic.editor.name }}</td>
-						<td>{{ comic.year | date('d-m-Y') }}</td>
+						<td>{{ comic.year }}</td>
 						<td>
-							{% for image in comic.images %}<img src="{{ asset('media/'~image.src) }}" alt="" width="100px">
-							{% endfor %}
+							<a href="{{ path('comic_show', { 'id' : comic.id }) }}">
+								{% for image in comic.images %}<img src="{{ asset('media/'~image.src) }}" alt="" width="100px">
+								{% endfor %}
+							</a>
 						</td>
 					</tr>
 				{% endfor %}

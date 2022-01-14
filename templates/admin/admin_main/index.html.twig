@@ -5,23 +5,20 @@
 {% block body %}
 <style>
     .example-wrapper {
-        margin: 1em auto;
         max-width: 800px;
-        width: 95%;
         font: 18px/1.5 sans-serif;
     }
 </style>
-<div class="example-wrapper text-center">
+<div class="example-wrapper container text-center">
     <h1>Administration!</h1>
-    <div class="mt-5">
-                <div><a href="{{ path('admin_user_list') }}" class="btn btn-success w-50 m-3">Gerer les utilisateurs</a></div>
-                <div><a href="{{ path('admin_comics_list') }}" class="btn btn-dark w-50 m-3">Gerer les comics</a></div>
-                <div><a href="{{ path('admin_writer_list') }}" class="btn btn-dark w-50 m-3">Gerer les auteurs</a></div>
-                <div><a href="{{ path('admin_designer_list') }}" class="btn btn-dark w-50 m-3">Gerer les dessinateurs</a></div>
-                <div><a href="{{ path('admin_editor_list') }}" class="btn btn-dark w-50 m-3">Gerer les editeurs</a></div>
-                <div><a href="{{ path('admin_licence_list') }}" class="btn btn-dark w-50 m-3">Gerer les licences</a></div>
-                <div><a href="{{ path('admin_image_list') }}" class="btn btn-dark w-50 m-3">Gerer les images</a></div>
-
+    <div class="mt-3">
+        <div><a href="{{ path('admin_user_list') }}" class="btn btn-success w-50 m-2">Gerer les utilisateurs</a></div>
+        <div><a href="{{ path('admin_comics_list') }}" class="btn btn-dark w-50 m-2">Gerer les comics</a></div>
+        <div><a href="{{ path('admin_writer_list') }}" class="btn btn-dark w-50 m-2">Gerer les auteurs</a></div>
+        <div><a href="{{ path('admin_designer_list') }}" class="btn btn-dark w-50 m-2">Gerer les dessinateurs</a></div>
+        <div><a href="{{ path('admin_editor_list') }}" class="btn btn-dark w-50 m-2">Gerer les editeurs</a></div>
+        <div><a href="{{ path('admin_licence_list') }}" class="btn btn-dark w-50 m-2">Gerer les licences</a></div>
+        <div><a href="{{ path('admin_image_list') }}" class="btn btn-dark w-50 m-2">Gerer les images</a></div>
     </div>
 </div>
 {% endblock %}

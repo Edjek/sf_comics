@@ -14,8 +14,11 @@
 		{% endfor %}
 
 		<div class="my-3">
-			<a href="{{ path('main') }}" class="btn btn-outline-primary">
+			<a href="{{ path('admin_main') }}" class="btn btn-outline-primary">
 				Accueil
+			</a>
+			<a href="{{ path('admin_create_comics') }}" class="btn btn-outline-primary">
+				Ajouter<i class="bi bi-plus-circle-dotted ms-2"></i>
 			</a>
 		</div>
 
@@ -47,7 +50,7 @@
 						<td>{{ comic.designer.name }}</td>
 						<td>{{ comic.licence.name }}</td>
 						<td>{{ comic.editor.name }}</td>
-						<td>{{ comic.year | date('d-m-Y') }}</td>
+						<td>{{ comic.year }}</td>
 						<td>
 							{% for image in comic.images %}<img src="{{ asset('media/'~image.src) }}" alt="" width="100px">
 							{% endfor %}

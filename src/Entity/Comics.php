@@ -21,7 +21,7 @@ class Comics
     #[ORM\Column(type: 'text')]
     private $description;
 
-    #[ORM\Column(type: 'date')]
+    #[ORM\Column(type: 'integer')]
     private $year;
 
     #[ORM\OneToMany(mappedBy: 'comics', targetEntity: Image::class)]
@@ -77,12 +77,12 @@ class Comics
         return $this;
     }
 
-    public function getYear(): ?\DateTimeInterface
+    public function getYear(): ?int
     {
         return $this->year;
     }
 
-    public function setYear(\DateTimeInterface $year): self
+    public function setYear(int $year): self
     {
         $this->year = $year;
 
