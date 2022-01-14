@@ -7,12 +7,21 @@ use App\Form\WriterType;
 use App\Repository\WriterRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminWriterController extends AbstractController
 {
+    #[Route('/admin/writer', name: 'admin_writer_list')]
+    public function comic_list(WriterRepository $writerRepository)
+    {
+        $writers = $writerRepository->findAll();
+
+        return $this->render('admin/admin_writer/writers.html.twig', [
+            'writers' => $writers,
+        ]);
+    }
+
     #[Route('/admin/create/writer', name: 'admin_create_writer')]
     public function createWriter(EntityManagerInterface $entityManagerInterface, Request $request)
     {
@@ -31,15 +40,13 @@ class AdminWriterController extends AbstractController
                 'Un auteur a été créé'
             );
 
-            return $this->redirectToRoute("writer_list");
+            return $this->redirectToRoute("admin_writer_list");
         }
 
         return $this->render("admin/admin_writer/writerform.html.twig", ['writerForm' => $writerForm->createView()]);
     }
 
-    /**
-     * @Route("admin/update/writer/{id}", name="update_writer")
-     */
+    #[Route('/admin/update/writer/{id}', name: 'admin_update_writer')]
     public function updateWriter(
         $id,
         WriterRepository $writerRepository,
@@ -62,7 +69,7 @@ class AdminWriterController extends AbstractController
                 'L\'auteur a été modifié'
             );
 
-            return $this->redirectToRoute('writer_list');
+            return $this->redirectToRoute('admin_writer_list');
         }
 
         return $this->render("admin/admin_writer/writerform.html.twig", ['writerForm' => $writerForm->createView()]);

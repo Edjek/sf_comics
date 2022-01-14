@@ -2,14 +2,13 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminUserController extends AbstractController
 {
@@ -37,7 +36,8 @@ class AdminUserController extends AbstractController
         $id,
         UserRepository $userRepository,
         Request $request,
-        EntityManagerInterface $entityManagerInterface
+        EntityManagerInterface $entityManagerInterface,
+        UserPasswordHasherInterface $userPasswordHasherInterface
     ) {
 
         $user = $userRepository->find($id);
@@ -47,6 +47,11 @@ class AdminUserController extends AbstractController
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
+
+            $plainPassWord = $userForm->get('password')->getData();
+            $hashedPassword = $userPasswordHasherInterface->hashPassword($user, $plainPassWord);
+            $user->setPassword($hashedPassword);
+
             $entityManagerInterface->persist($user);
             $entityManagerInterface->flush();
 

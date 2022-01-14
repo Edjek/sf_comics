@@ -12,6 +12,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminComicsController extends AbstractController
 {
+    #[Route('/admin/comics', name: 'admin_comics_list')]
+    public function comic_list(ComicsRepository $comicsRepository)
+    {
+        $comics = $comicsRepository->findAll();
+
+        return $this->render('admin/admin_comics/comics.html.twig', [
+            'comics' => $comics,
+        ]);
+    }
+
     #[Route('/admin/create/comics', name: 'admin_create_comics')]
     public function createComics(EntityManagerInterface $entityManagerInterface, Request $request)
     {
@@ -38,9 +48,7 @@ class AdminComicsController extends AbstractController
         return $this->render("admin/admin_comics/comicsform.html.twig", ['comicsForm' => $comicsForm->createView()]);
     }
 
-        /**
-     * @Route("admin/update/comics/{id}", name="update_comics")
-     */
+    #[Route('/admin/update/comics/{id}', name: 'admin_update_comics')]
     public function updateComics(
         $id,
         ComicsRepository $comicsRepository,
@@ -63,7 +71,7 @@ class AdminComicsController extends AbstractController
                 'Le comics a été modifié'
             );
 
-            return $this->redirectToRoute('comics_list');
+            return $this->redirectToRoute('admin_comics_list');
         }
 
         return $this->render("admin/admin_comics/comicsform.html.twig", ['comicsForm' => $comicsForm->createView()]);
@@ -83,6 +91,6 @@ class AdminComicsController extends AbstractController
             'La comics a été supprimé'
         );
 
-        return $this->redirectToRoute("comics_list");
+        return $this->redirectToRoute("admin_comics_list");
     }
 }

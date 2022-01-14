@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}Comics!
 {% endblock %}
@@ -30,6 +30,8 @@
 					<th scope="col">Editor</th>
 					<th scope="col">Year</th>
 					<th scope="col">Images</th>
+					<th scope="col">Modifier</th>
+					<th scope="col">Supprimer</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -49,6 +51,16 @@
 						<td>
 							{% for image in comic.images %}<img src="{{ asset('media/'~image.src) }}" alt="" width="100px">
 							{% endfor %}
+						</td>
+						<td>
+							<a href="{{ path('admin_update_comics', { 'id' : comic.id }) }}">
+								<i class="bi bi-pencil-square"></i>
+							</a>
+						</td>
+						<td>
+							<a href="{{ path('admin_delete_comics', { 'id' : comic.id }) }}">
+								<i class="bi bi-trash text-danger"></i>
+							</a>
 						</td>
 					</tr>
 				{% endfor %}
