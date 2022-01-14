@@ -27,17 +27,17 @@ class Comics
     #[ORM\OneToMany(mappedBy: 'comics', targetEntity: Image::class)]
     private $images;
 
-    #[ORM\OneToOne(targetEntity: Licence::class, cascade: ['persist', 'remove'])]
-    private $licence;
-
-    #[ORM\OneToOne(targetEntity: Editor::class, cascade: ['persist', 'remove'])]
-    private $editor;
-
-    #[ORM\OneToOne(targetEntity: Writer::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(targetEntity: Writer::class, inversedBy: 'comics')]
     private $writer;
 
-    #[ORM\OneToOne(targetEntity: Designer::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(targetEntity: Designer::class, inversedBy: 'comics')]
     private $designer;
+
+    #[ORM\ManyToOne(targetEntity: Licence::class, inversedBy: 'comics')]
+    private $licence;
+
+    #[ORM\ManyToOne(targetEntity: Editor::class, inversedBy: 'comics')]
+    private $editor;
 
     public function __construct()
     {
@@ -115,30 +115,6 @@ class Comics
         return $this;
     }
 
-    public function getLicence(): ?Licence
-    {
-        return $this->licence;
-    }
-
-    public function setLicence(?Licence $licence): self
-    {
-        $this->licence = $licence;
-
-        return $this;
-    }
-
-    public function getEditor(): ?Editor
-    {
-        return $this->editor;
-    }
-
-    public function setEditor(?Editor $editor): self
-    {
-        $this->editor = $editor;
-
-        return $this;
-    }
-
     public function getWriter(): ?Writer
     {
         return $this->writer;
@@ -159,6 +135,30 @@ class Comics
     public function setDesigner(?Designer $designer): self
     {
         $this->designer = $designer;
+
+        return $this;
+    }
+
+    public function getLicence(): ?Licence
+    {
+        return $this->licence;
+    }
+
+    public function setLicence(?Licence $licence): self
+    {
+        $this->licence = $licence;
+
+        return $this;
+    }
+
+    public function getEditor(): ?Editor
+    {
+        return $this->editor;
+    }
+
+    public function setEditor(?Editor $editor): self
+    {
+        $this->editor = $editor;
 
         return $this;
     }
