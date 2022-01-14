@@ -9,11 +9,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
-    #[Route('/admin/create/user', name: 'admin_create_user')]
-    public function createUser(EntityManagerInterface $entityManagerInterface, Request $request)
+    #[Route('/sign-up', name: 'sign-up')]
+    public function createUser(EntityManagerInterface $entityManagerInterface, Request $request, 
+    UserPasswordHasherInterface $userPasswordHasherInterface)
     {
         $user = new User();
 
@@ -22,6 +24,12 @@ class UserController extends AbstractController
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
+            $user->setRoles(["ROLE_USER"]);
+
+            $plainPassWord = $userForm->get('password')->getData();
+            $hashedPassword = $userPasswordHasherInterface->hashPassword($user, $plainPassWord);
+            $user->setPassword($hashedPassword);
+
             $entityManagerInterface->persist($user);
             $entityManagerInterface->flush();
 
@@ -30,7 +38,7 @@ class UserController extends AbstractController
                 'Un utilisateur a été créé'
             );
 
-            return $this->redirectToRoute("user_list");
+            return $this->redirectToRoute("app_login");
         }
 
         return $this->render("admin/admin_user/userform.html.twig", ['userForm' => $userForm->createView()]);

@@ -25,6 +25,7 @@ class Licence
     private $media;
 
     #[ORM\OneToMany(mappedBy: 'licence', targetEntity: Comics::class)]
+    #[ORM\JoinColumn(onDelete:'CASCADE')]
     private $comics;
 
     public function __construct()

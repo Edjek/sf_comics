@@ -23,11 +23,21 @@
 
 	<body>
 		{% block body %}{% endblock %}
-        {% for editor in geditors.getAll %}
-			<h3>{{ editor.name }}</h3>
-		{% endfor %}
         {% for licence in glicences.getAll %}
-			<h3>{{ licence.name }}</h3>
+			<div class="container mt-5">
+				<div class="border p-2">
+					<h3>Nos licences</h3>
+					<div>{{ licence.name }}</div>
+				</div>
+			</div>
+		{% endfor %}
+        {% for editor in geditors.getAll %}
+			<div class="container mt-3">
+				<div class="border p-2">
+					<h3>Nos Editeurs</h3>
+					<div>{{ editor.name }}</div>
+				</div>
+			</div>
 		{% endfor %}
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	</body>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Designer!
+{% block title %}Users!
 {% endblock %}
 
 {% block body %}
@@ -13,28 +13,22 @@
 			</div>
 		{% endfor %}
 
-		<div class="my-3">
-			<a href="{{ path('main') }}" class="btn btn-outline-primary">
-				Accueil
-			</a>
-		</div>
-
 		<table class="table table-hover text-center">
 			<thead>
 				<tr>
 					<th scope="col">Name</th>
-					<th scope="col">Description</th>
+					<th scope="col">Firstname</th>
 				</tr>
 			</thead>
 			<tbody>
-				{% for designer in designers %}
+				{% for user in users %}
 					<tr>
 						<td>
-							<a href="{{ path('designer_show', { 'id' : designer.id }) }}">
-								{{ designer.name }}
+							<a href="{{ path('user_show', { 'id' : user.id }) }}">
+								{{ user.name }}
 							</a>
 						</td>
-						<td>{{ designer.country }}</td>
+						<td>{{ user.firstname }}</td>
 					</tr>
 				{% endfor %}
 			</tbody>

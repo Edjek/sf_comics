@@ -28,15 +28,19 @@ class Comics
     private $images;
 
     #[ORM\ManyToOne(targetEntity: Writer::class, inversedBy: 'comics')]
+    #[ORM\JoinColumn(onDelete:'CASCADE')]
     private $writer;
 
     #[ORM\ManyToOne(targetEntity: Designer::class, inversedBy: 'comics')]
+    #[ORM\JoinColumn(onDelete:'CASCADE')]
     private $designer;
 
     #[ORM\ManyToOne(targetEntity: Licence::class, inversedBy: 'comics')]
+    #[ORM\JoinColumn(onDelete:'CASCADE')]
     private $licence;
 
     #[ORM\ManyToOne(targetEntity: Editor::class, inversedBy: 'comics')]
+    #[ORM\JoinColumn(onDelete:'CASCADE')]
     private $editor;
 
     public function __construct()

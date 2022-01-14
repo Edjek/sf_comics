@@ -13,6 +13,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminUserController extends AbstractController
 {
+    #[Route('/admin/user', name: 'user_list')]
+    public function user_list(UserRepository $userRepository)
+    {
+        $users = $userRepository->findAll();
+
+        return $this->render('admin/admin_user/users.html.twig', [
+            'users' => $users,
+        ]);
+    }
+
+    #[Route('admin/user/{id}', name: 'user_show')]
+    public function userShow($id, UserRepository $usersRepository)
+    {
+        $user = $usersRepository->find($id);
+        return $this->render('admin/admin_user/user.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
     #[Route('/admin/update/user/{id}', name: 'admin_update_user')]
     public function updateUser(
         $id,
