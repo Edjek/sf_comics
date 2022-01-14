@@ -22,8 +22,21 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-
+	<style>
+		.fixed {
+			position: fixed;
+			top: 20px;
+			right: 30px;
+		}
+	</style>
 	<body>
+		{% if app.user is not null %}
+			<div class="fixed">
+				<a href="{{ path('app_logout') }}" class="btn btn-outline-primary">
+					Logout
+				</a>
+			</div>
+		{% endif %}
 		<div class="text-center">
 			<a href="{{ path('admin_main') }}">
 				<img src="{{ asset('img/logo.png')}}" width="150px" alt="">
