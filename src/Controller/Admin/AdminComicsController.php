@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Comics;
 use App\Form\ComicsType;
+use App\Repository\ComicsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,5 +36,53 @@ class AdminComicsController extends AbstractController
         }
 
         return $this->render("admin/admin_comics/comicsform.html.twig", ['comicsForm' => $comicsForm->createView()]);
+    }
+
+        /**
+     * @Route("admin/update/comics/{id}", name="update_comics")
+     */
+    public function updateComics(
+        $id,
+        ComicsRepository $comicsRepository,
+        Request $request,
+        EntityManagerInterface $entityManagerInterface
+    ) {
+
+        $comics = $comicsRepository->find($id);
+
+        $comicsForm = $this->createForm(ComicsType::class, $comics);
+
+        $comicsForm->handleRequest($request);
+
+        if ($comicsForm->isSubmitted() && $comicsForm->isValid()) {
+            $entityManagerInterface->persist($comics);
+            $entityManagerInterface->flush();
+
+            $this->addFlash(
+                'notice',
+                'Le comics a été modifié'
+            );
+
+            return $this->redirectToRoute('comics_list');
+        }
+
+        return $this->render("admin/admin_comics/comicsform.html.twig", ['comicsForm' => $comicsForm->createView()]);
+    }
+
+    #[Route('/admin/delete/comics/{id}', name: 'admin_delete_comics')]
+    public function deleteComics($id, ComicsRepository $comicsRepository, EntityManagerInterface $entityManagerInterface)
+    {
+        $comics = $comicsRepository->find($id);
+
+        $entityManagerInterface->remove($comics);
+
+        $entityManagerInterface->flush();
+
+        $this->addFlash(
+            'notice',
+            'La comics a été supprimé'
+        );
+
+        return $this->redirectToRoute("comics_list");
     }
 }

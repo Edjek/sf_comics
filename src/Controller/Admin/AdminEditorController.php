@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Editor;
 use App\Form\EditorType;
+use App\Repository\EditorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,5 +35,53 @@ class AdminEditorController extends AbstractController
         }
 
         return $this->render("admin/admin_editor/editorform.html.twig", ['editorForm' => $editorForm->createView()]);
+    }
+
+        /**
+     * @Route("admin/update/editor/{id}", name="update_editor")
+     */
+    public function updateEditor(
+        $id,
+        EditorRepository $editorRepository,
+        Request $request,
+        EntityManagerInterface $entityManagerInterface
+    ) {
+
+        $editor = $editorRepository->find($id);
+
+        $editorForm = $this->createForm(EditorType::class, $editor);
+
+        $editorForm->handleRequest($request);
+
+        if ($editorForm->isSubmitted() && $editorForm->isValid()) {
+            $entityManagerInterface->persist($editor);
+            $entityManagerInterface->flush();
+
+            $this->addFlash(
+                'notice',
+                'L\'editeur a été modifié'
+            );
+
+            return $this->redirectToRoute('editor_list');
+        }
+
+        return $this->render("admin/admin_editor/editorform.html.twig", ['editorForm' => $editorForm->createView()]);
+    }
+
+    #[Route('/admin/delete/editor/{id}', name: 'admin_delete_editor')]
+    public function deleteEditor($id, EditorRepository $editorRepository, EntityManagerInterface $entityManagerInterface)
+    {
+        $editor = $editorRepository->find($id);
+
+        $entityManagerInterface->remove($editor);
+
+        $entityManagerInterface->flush();
+
+        $this->addFlash(
+            'notice',
+            'L\'editeur a été supprimé'
+        );
+
+        return $this->redirectToRoute("editor_list");
     }
 }
