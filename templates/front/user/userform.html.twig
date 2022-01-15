@@ -1,15 +1,27 @@
-{% extends 'base.html.twig' %}
+{% extends (app.user is not null and app.user.roles[0] == 'ROLE_ADMIN') ? 'admin/base.html.twig' : 'base.html.twig' %}
 
-{% block title %}User
+{% block title %}Sign-up
 {% endblock %}
 
 {% block body %}
 
 	<div class="container">
 		<div class="my-3">
-			<a href="{{ path('main') }}" class="btn btn-outline-primary">
-				Accueil
-			</a>
+			{% if app.user is not null %}
+				{% if app.user.roles[0] == 'ROLE_ADMIN' %}
+					<a href="{{ path('admin_main') }}" class="btn btn-outline-primary">
+						Accueil
+					</a>
+				{% else %}
+					<a href="{{ path('main') }}" class="btn btn-outline-primary">
+						Accueil
+					</a>
+				{% endif %}
+			{% elseif app.user is null %}
+				<a href="{{ path('main') }}" class="btn btn-outline-primary">
+					Accueil
+				</a>
+			{% endif %}
 		</div>
 
 		{{ form_start(userForm) }}
